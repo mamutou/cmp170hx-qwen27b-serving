@@ -1,0 +1,11 @@
+models/
+packs/
+*.gguf
+*.safetensors
+*.bin
+*.log
+*.local.*
+.env
+.venv/
+venv/
+__pycache__/
