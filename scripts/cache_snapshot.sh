@@ -10,6 +10,7 @@ SNAP_DIR="${SNAP_DIR:-$HOME/cache-snapshots}"
 DST="$SNAP_DIR/vllm.cache"
 STAMP_FILE="$SNAP_DIR/vllm.cache.stamp"
 VP="$HOME/venv-hq/lib/python3.12/site-packages/vllm"
+MODEL_DIR="${MODEL_DIR:-/models/Qwen3.8-27B-W8A16}"
 SRC_DIRS=("$HOME/.cache/vllm" "$HOME/.triton" "$HOME/.cache/flashinfer" "$HOME/.cache/torch")
 
 stamp() {
@@ -17,7 +18,7 @@ stamp() {
   ver=$(grep -oE '__version__ = "[^"]+"' "$VP/version.py" 2>/dev/null | cut -d'"' -f2 || true)
   launch=$(sha256sum "$HOME/hq_prod.sh" 2>/dev/null | cut -c1-16 || true)
   patched=$(sha256sum "$VP/v1/attention/backends/flash_attn.py" 2>/dev/null | cut -c1-16 || true)
-  cfg=$(sha256sum "$HOME/models/qwen38-heretic-w8a16/config.json" 2>/dev/null | cut -c1-16 || true)
+  cfg=$(sha256sum "${MODEL_DIR:-/models/Qwen3.8-27B-W8A16}/config.json" 2>/dev/null | cut -c1-16 || true)
   echo "vllm=${ver:-?} launch=${launch:-?} patched=${patched:-?} cfg=${cfg:-?}"
 }
 
