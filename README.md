@@ -53,7 +53,7 @@ HQ_DIR=/opt/hyperqwen MODEL=/models/Qwen3.8-27B-W8A16 ./scripts/serve.sh
 PORT=18020 MODEL=qwen3.8-27b python3 scripts/probe.py 32768 128 1 9111
 ```
 
-细节：[安装](docs/install.md) · [硬件前提](docs/hardware.md) · [测量方法与全部数字](docs/benchmarks.md) · [常驻服务与网关](docs/production.md) · [踩坑](docs/gotchas.md)。
+细节：[安装](docs/install.md) · [硬件前提](docs/hardware.md) · [测量方法与全部数字](docs/benchmarks.md) · [常驻服务与网关](docs/production.md) · [冷启动 195→26 s](docs/cold-start.md) · [踩坑](docs/gotchas.md)。
 
 ## 配置矩阵（决定成败的就这几个）
 
