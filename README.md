@@ -53,7 +53,7 @@ HQ_DIR=/opt/hyperqwen MODEL=/models/Qwen3.8-27B-W8A16 ./scripts/serve.sh
 PORT=18020 MODEL=qwen3.8-27b python3 scripts/probe.py 32768 128 1 9111
 ```
 
-细节：[安装](docs/install.md) · [硬件前提](docs/hardware.md) · [测量方法与全部数字](docs/benchmarks.md) · [踩坑](docs/gotchas.md)。
+细节：[安装](docs/install.md) · [硬件前提](docs/hardware.md) · [测量方法与全部数字](docs/benchmarks.md) · [常驻服务与网关](docs/production.md) · [踩坑](docs/gotchas.md)。
 
 ## 配置矩阵（决定成败的就这几个）
 
@@ -95,6 +95,8 @@ PORT=18020 MODEL=qwen3.8-27b python3 scripts/probe.py 32768 128 1 9111
 - 未做 ≥1 h 长稳压测。sm80 上有两起投机解码故障报告（上游 issue #72 / #98），
   上报方都是 driver 610.43.02 且手工打补丁的 wheel；本机同为 610.43.02，本轮约 40 分钟含 262K 长上下文 0 Xid，
   **但上生产前仍建议自己跑一轮并发长稳压测**。
+- 品质抽测 17/18（复读项是度量误报，正文复测 0% 重复）、60 分钟 4 路并发长稳 164 轮 0 失败、
+  吞吐 162 tok/s 无衰减、0 Xid —— 见 [benchmarks.md](docs/benchmarks.md#品质抽测)。
 - W8A16 在这张卡上已接近带宽上限（约 450 GB/s / 1355–1605 GB/s），再往上要么改权重位宽，要么换卡。
 - INT8 张量核在这张卡上只有 FP16 的约 1/8（≈46 TOPS），**不要开 W8A8 / `INT8_ACT` 一类计算路径**。
 
