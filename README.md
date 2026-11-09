@@ -38,7 +38,7 @@ decoder-only 模型一次 verify 步要读完整份权重（W8A16 ≈ 9.5 GB / t
 ## 快速开始
 
 ```bash
-git clone <this-repo> 170hx-qwen27b && cd 170hx-qwen27b
+git clone https://github.com/mamutou/cmp170hx-qwen27b-serving && cd cmp170hx-qwen27b-serving
 
 # 1) 装软件（不下载任何权重）
 HQ_DIR=/opt/hyperqwen ./scripts/install.sh
